@@ -15,15 +15,13 @@ const GRAPHQL_URL = getAPIUrl("dev");
 const initApollo = () => {
   const httpLink = createUploadLink({
     uri: GRAPHQL_URL,
-    credentials: "same-origin"
+    credentials: "include"
   });
 
   const authLink = setContext(async (_, { headers }) => {
     let token;
     try {
-      // token = await getTokenFromAsyncStorage();
-      token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIyMDE5LTA3LTA0VDE3OjUwOjAyLjcyOTA5NSswOTowMCIsInVzZXJJRCI6IjEifQ.gjg8kK5Y5nhhtA6QIeGewjM4cpnj-NdDJjZlojHiK5Q";
+      token = await getTokenFromAsyncStorage();
     } catch (err) {
       console.log(`Can't get a token`, err);
     }
